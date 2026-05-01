@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "name": "Vandi Go Admin",
+      "email": "admin@vandigo.com",
+      "password": "$2b$10$hgNl9Nvf44YbwcDudVzUbebYpC./xOSysFJutwSqMQAQ9/CYz9dUW",
+      "phone": "+91 9000012345",
+      "role": "admin",
+      "_id": "1777064873937"
+    },
+    {
+      "name": "Driver John",
+      "email": "driver@vandigo.com",
+      "password": "$2b$10$YcBCui2tLlglDM/sb7PdaeSApSNr2h.t3iu9txz1zTk7L7YmGUMy6",
+      "phone": "+91 8000054321",
+      "role": "driver",
+      "_id": "1777064873940"
+    },
+    {
+      "name": "Siva",
+      "email": "ramsiva97465@gmail.com",
+      "password": "$2b$10$Mq9/bwbJNC9txSAj4pqHEO45ybWm1.gmZgTF3SENlhs5Nfezhl.uq",
+      "role": "admin",
+      "_id": "1777549529754"
+    }
+  ],
+  "trips": [],
+  "cab_types": [
+    {
+      "name": "Hatchback",
+      "base_fare": 50,
+      "price_per_km": 12,
+      "min_fare": 100,
+      "commission_per_km": 2,
+      "_id": "1"
+    },
+    {
+      "name": "Sedan",
+      "base_fare": 80,
+      "price_per_km": 15,
+      "min_fare": 150,
+      "commission_per_km": 3,
+      "_id": "2"
+    },
+    {
+      "name": "SUV",
+      "base_fare": 150,
+      "price_per_km": 20,
+      "min_fare": 250,
+      "commission_per_km": 5,
+      "_id": "3"
+    }
+  ]
+}
