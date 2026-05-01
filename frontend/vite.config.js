@@ -10,25 +10,28 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: 'auto',
       includeAssets: ['favicon.svg', 'logo.png'],
       manifest: {
         name: 'Vandi Go',
         short_name: 'VandiGo',
         description: 'Vandi Go - Premium Cab Marketplace',
         theme_color: '#0B1E3F',
+        background_color: '#0B1E3F',
+        display: 'standalone',
         icons: [
           {
-            src: 'logo.png',
+            src: '/logo.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'logo.png',
+            src: '/logo.png',
             sizes: '512x512',
             type: 'image/png'
           },
           {
-            src: 'logo.png',
+            src: '/logo.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
