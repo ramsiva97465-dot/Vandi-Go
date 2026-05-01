@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
 import DriverDashboard from './pages/DriverDashboard';
 import Navbar from './components/Navbar';
+import InstallPrompt from './components/InstallPrompt';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
 const PrivateRoute = ({ children, role }) => {
@@ -36,6 +37,7 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-[#020617]">
       {!hideNavbar && <Navbar />}
+      <InstallPrompt />
       <main>
         <Routes>
           <Route path="/login" element={<Login />} />
