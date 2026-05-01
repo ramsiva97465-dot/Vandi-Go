@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -103,7 +104,7 @@ const Landing = () => {
 
   const fetchCabTypes = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/cab-types');
+      const res = await axios.get(`${API_URL}/api/cab-types`);
       setCabTypes(res.data);
       if (res.data.length > 0) {
         setFormData(prev => ({ ...prev, cab_type_id: res.data[0]._id, carType: res.data[0].name }));
@@ -115,7 +116,7 @@ const Landing = () => {
     if (data.pickup_lat && data.drop_lat && data.cab_type_id) {
       setIsCalculating(true);
       try {
-        const res = await axios.post('http://localhost:5000/api/trips/calculate-distance', {
+        const res = await axios.post(`${API_URL}/api/trips/calculate-distance`, {
           pickup_lat: data.pickup_lat,
           pickup_lng: data.pickup_lng,
           drop_lat: data.drop_lat,
@@ -146,7 +147,7 @@ const Landing = () => {
       async (position) => {
         const { latitude, longitude } = position.coords;
         try {
-          const res = await axios.get(`http://localhost:5000/api/geo/reverse?lat=${latitude}&lon=${longitude}`);
+          const res = await axios.get(`${API_URL}/api/geo/reverse?lat=${latitude}&lon=${longitude}`);
           if (res.data) {
             const newData = { 
               ...formData, 
@@ -188,7 +189,7 @@ const Landing = () => {
     e.preventDefault();
     setStatus({ type: 'loading', msg: 'Processing your request...' });
     try {
-      await axios.post('http://localhost:5000/api/trips/public', formData);
+      await axios.post(`${API_URL}/api/trips/public`, formData);
       setStatus({ type: 'success', msg: 'Booking created! Drivers will contact you soon.' });
       setFormData({
         pickupLocation: '', dropLocation: '', carType: 'Sedan', cab_type_id: '',

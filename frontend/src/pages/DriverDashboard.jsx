@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -173,7 +174,7 @@ const DriverDashboard = () => {
   const fetchStats = async (range) => {
     setStatsLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/trips/stats?range=${range}`, {
+      const res = await axios.get(`${API_URL}/api/trips/stats?range=${range}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setStats(res.data);
@@ -186,7 +187,7 @@ const DriverDashboard = () => {
 
   const fetchLeads = async (isInitial = false) => {
     try {
-      const res = await axios.get('http://localhost:5000/api/trips/marketplace', {
+      const res = await axios.get(`${API_URL}/api/trips/marketplace`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       const data = res.data || [];
@@ -249,7 +250,7 @@ const DriverDashboard = () => {
 
   const acceptLead = async (id) => {
     try {
-      await axios.post(`http://localhost:5000/api/trips/${id}/accept`, {}, {
+      await axios.post(`${API_URL}/api/trips/${id}/accept`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       fetchLeads(true);
@@ -261,7 +262,7 @@ const DriverDashboard = () => {
   const verifyOTP = async (id, type, otp) => {
     try {
       const endpoint = type === 'start' ? 'verify-start-otp' : 'verify-drop-otp';
-      await axios.post(`http://localhost:5000/api/trips/${id}/${endpoint}`, { otp }, {
+      await axios.post(`${API_URL}/api/trips/${id}/${endpoint}`, { otp }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       fetchLeads(true);

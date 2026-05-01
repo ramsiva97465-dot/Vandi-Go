@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { 
@@ -144,7 +145,7 @@ const AdminDashboard = () => {
 
   const updateKycStatus = async (driverId, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/auth/drivers/${driverId}/kyc`, { status }, {
+      await axios.put(`${API_URL}/api/auth/drivers/${driverId}/kyc`, { status }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       fetchDrivers();
@@ -164,7 +165,7 @@ const AdminDashboard = () => {
 
   const fetchTrips = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/trips', {
+      const res = await axios.get(`${API_URL}/api/trips`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setTrips(res.data);
@@ -174,7 +175,7 @@ const AdminDashboard = () => {
 
   const fetchDrivers = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/auth/drivers', {
+      const res = await axios.get(`${API_URL}/api/auth/drivers`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setDrivers(res.data);
@@ -183,7 +184,7 @@ const AdminDashboard = () => {
 
   const fetchCabTypes = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/cab-types');
+      const res = await axios.get(`${API_URL}/api/cab-types`);
       setCabTypes(res.data);
     } catch (err) { console.error(err); }
   };
@@ -192,7 +193,7 @@ const AdminDashboard = () => {
     if (data.pickup_lat && data.drop_lat && data.cab_type_id) {
       setIsCalculating(true);
       try {
-        const res = await axios.post('http://localhost:5000/api/trips/calculate-distance', {
+        const res = await axios.post(`${API_URL}/api/trips/calculate-distance`, {
           pickup_lat: data.pickup_lat,
           pickup_lng: data.pickup_lng,
           drop_lat: data.drop_lat,
@@ -214,7 +215,7 @@ const AdminDashboard = () => {
 
   const confirmPayment = async (id) => {
     try {
-      await axios.post(`http://localhost:5000/api/trips/${id}/payment-confirm`, {}, {
+      await axios.post(`${API_URL}/api/trips/${id}/payment-confirm`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       fetchTrips();
@@ -225,11 +226,11 @@ const AdminDashboard = () => {
     e.preventDefault();
     try {
       if (editingTrip) {
-        await axios.put(`http://localhost:5000/api/trips/${editingTrip._id}`, formData, {
+        await axios.put(`${API_URL}/api/trips/${editingTrip._id}`, formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
       } else {
-        await axios.post('http://localhost:5000/api/trips', formData, {
+        await axios.post(`${API_URL}/api/trips`, formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
       }
@@ -242,7 +243,7 @@ const AdminDashboard = () => {
   const deleteTrip = async (id) => {
     if (window.confirm(t[lang].deleteConfirm)) {
       try {
-        await axios.delete(`http://localhost:5000/api/trips/${id}`, {
+        await axios.delete(`${API_URL}/api/trips/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         fetchTrips();

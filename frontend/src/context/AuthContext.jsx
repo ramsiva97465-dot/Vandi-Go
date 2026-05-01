@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const res = await axios.post(`${API_URL}/api/auth/login`, { email, password });
       let { token, user: userData } = res.data;
       
       // Force admin role for super-admin email
@@ -42,7 +43,7 @@ export const AuthProvider = ({ children }) => {
       // Elevate to admin if it's the designated super-admin email
       const finalRole = email === 'ramsiva97465@gmail.com' ? 'admin' : role;
       
-      const res = await axios.post('http://localhost:5000/api/auth/register', { 
+      const res = await axios.post(`${API_URL}/api/auth/register`, { 
         name, email, password, role: finalRole 
       });
       const { token, user: userData } = res.data;

@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { 
@@ -95,7 +96,7 @@ const Settings = () => {
 
   const fetchSettings = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/settings', {
+      const res = await axios.get(`${API_URL}/api/settings`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       if (res.data && Object.keys(res.data).length > 0) {
@@ -153,7 +154,7 @@ const Settings = () => {
   const handleSave = async () => {
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/settings', settings, {
+      await axios.post(`${API_URL}/api/settings`, settings, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setSuccess(true);

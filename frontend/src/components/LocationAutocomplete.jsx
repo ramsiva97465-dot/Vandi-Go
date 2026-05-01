@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { MapPin, Loader2, Search } from 'lucide-react';
@@ -39,7 +40,7 @@ const LocationAutocomplete = ({ placeholder, onSelect, value, icon: Icon = MapPi
     setLoading(true);
     searchTimeout.current = setTimeout(async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/geo/autocomplete?text=${val}`);
+        const res = await axios.get(`${API_URL}/api/geo/autocomplete?text=${val}`);
         setSuggestions(res.data);
         setShowDropdown(true);
       } catch (err) {

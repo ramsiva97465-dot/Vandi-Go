@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Trash2, Edit3, Plus, X, IndianRupee, Car } from 'lucide-react';
@@ -66,7 +67,7 @@ const CabManagement = () => {
 
   const fetchCabTypes = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/cab-types');
+      const res = await axios.get(`${API_URL}/api/cab-types`);
       setCabTypes(res.data);
     } catch (err) {
       console.error(err);
@@ -83,9 +84,9 @@ const CabManagement = () => {
     e.preventDefault();
     try {
       if (editingCab) {
-        await axios.put(`http://localhost:5000/api/cab-types/${editingCab._id}`, formData);
+        await axios.put(`${API_URL}/api/cab-types/${editingCab._id}`, formData);
       } else {
-        await axios.post('http://localhost:5000/api/cab-types', formData);
+        await axios.post(`${API_URL}/api/cab-types`, formData);
       }
       setShowModal(false);
       setEditingCab(null);
@@ -99,7 +100,7 @@ const CabManagement = () => {
   const deleteCab = async (id) => {
     if (window.confirm(t[lang].confirmDelete)) {
       try {
-        await axios.delete(`http://localhost:5000/api/cab-types/${id}`);
+        await axios.delete(`${API_URL}/api/cab-types/${id}`);
         fetchCabTypes();
       } catch (err) {
         alert(t[lang].errDelete);
